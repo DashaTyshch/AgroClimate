@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#04c582">
+    <Grid Background="#43c2af">
         <Border Background="DarkSlateGray" CornerRadius="14" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Margin="25">
                 <TextBlock FontSize="26" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center">Вхід</TextBlock>

@@ -26,6 +26,9 @@ namespace Dima.Models
                 case ModesEnum.Main:
                     _contentWindow.ContentControl.Content = _mainView;
                     break;
+                case ModesEnum.AddRequest:
+                    _contentWindow.ContentControl.Content = new AddRequestView();
+                    break;
                 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);

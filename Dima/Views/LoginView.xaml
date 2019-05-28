@@ -5,7 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Button Content="Вхід" Command="{Binding LoginCommand}"></Button>
+    <Grid Background="#04c582">
+        <Border Background="DarkSlateGray" CornerRadius="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="25">
+                <TextBlock FontSize="26" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center">Вхід</TextBlock>
+                <Separator/>
+                <TextBlock Foreground="White" FontSize="18">Логін:</TextBlock>
+                <TextBox Background="#545d6a" Foreground="White" FontSize="17" Width="220"/>
+                <TextBlock Foreground="White" FontSize="18">Пароль:</TextBlock>
+                <PasswordBox Background="#545d6a" Foreground="White" FontSize="17" Width="220"/>
+                <Button Content="Ввійти" Command="{Binding LoginCommand}" Background="White" Foreground="#545d6a"
+                        Margin="0 30 0 0" FontSize="20" FontWeight="DemiBold"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

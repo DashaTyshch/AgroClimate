@@ -36,12 +36,20 @@ namespace Dima.Database.Services
             "INNER JOIN brigadier bri ON r.telephone_number_of_brigadier = bri.telephone_number_of_brigadier " +
             "INNER JOIN engineeragroclimate eng ON r.tab_number = eng.tab_number;";
 
-        private static string AllBrigadiersQuery => "SELECT * FROM brigadier";
         private static string AllRequestsQuery => "SELECT * FROM request";
 
+        private static string AllBrigadiersQuery => "SELECT * FROM brigadier";
+        private static string BrigByEmailQuery(string email) => $"SELECT * FROM brigadier WHERE email = '{email}'";
 
-        private static string BrigByEmailQuery(string email)
-            => $"SELECT * FROM brigadier WHERE email = '{email}'";
+
+        private static string AddEngineerQuery(EngineerAgroclimate engineer)
+        {
+            return "INSERT INTO engineeragroclimate " +
+                   $"VALUES ({engineer.Tab_Number}, '{engineer.Telephone_Number}', " +
+                   $"        '{engineer.Last_Name}', '{engineer.First_Name}', '{engineer.Patronym}', " +
+                   $"{ (engineer.Email == null ? $"'{engineer.Email}'" : "NULL") }); ";
+        }
+
 
         private PostgresService()
         {
@@ -62,20 +70,24 @@ namespace Dima.Database.Services
             return QueryInternal<RequestsInfo>(RequestsInfoQuery).ToList();
         }
 
-        public List<Brigadier> GetAllBrigadiers()
-        {
-            return QueryInternal<Brigadier>(AllBrigadiersQuery).ToList();
-        }
-
         public List<Request> GetAllRequest()
         {
             return QueryInternal<Request>(AllRequestsQuery).ToList();
         }
 
+        public List<Brigadier> GetAllBrigadiers()
+        {
+            return QueryInternal<Brigadier>(AllBrigadiersQuery).ToList();
+        }
 
         public Brigadier GetByEmail(string email)
         {
             return QueryInternal<Brigadier>(BrigByEmailQuery(email)).FirstOrDefault();
+        }
+
+        public void AddEngineer(EngineerAgroclimate engineer)
+        {
+            ExecuteInternal(AddEngineerQuery(engineer));
         }
 
         private IEnumerable<T> QueryInternal<T>(string sql)

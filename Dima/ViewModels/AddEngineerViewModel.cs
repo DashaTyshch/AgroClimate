@@ -1,7 +1,6 @@
 ﻿using Dima.Database.Entities;
 using Dima.Models;
 using Dima.Tools;
-using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -12,6 +11,7 @@ namespace Dima.ViewModels
     {
         #region Private Fields
         private AddEngineerModel Model { get; }
+
         private EngineerAgroclimate _engineerAgroclimate;
 
         private ICommand _backCommand;
@@ -81,8 +81,7 @@ namespace Dima.ViewModels
 
         private bool AddEngineerCanExecute(object obj)
         {
-            return !string.IsNullOrEmpty(Engineer.Email) &&
-                   !string.IsNullOrEmpty(Engineer.First_Name) &&
+            return !string.IsNullOrEmpty(Engineer.First_Name) &&
                    !string.IsNullOrEmpty(Engineer.Patronym) &&
                    !string.IsNullOrEmpty(Engineer.Last_Name) &&
                    !string.IsNullOrEmpty((Engineer.Tab_Number).ToString()) &&
@@ -91,14 +90,20 @@ namespace Dima.ViewModels
 
         private void AddEngineerExecute(object obj)
         {
-            var res = Model.CreateNewEngineer(Engineer);
+            //var res = Model.CreateNewEngineer(Engineer);
             //if (res == AddResult.Success)
             //{
             //    MessageBox.Show(res.GetDescription());
             //    Model.GoBack();
             //}
             //else MessageBox.Show(res.GetDescription());
-            MessageBox.Show("creation...");
+            if (Model.CreateNewEngineer(Engineer))
+            {
+                MessageBox.Show("Created.");
+                Model.GoBack();
+            }
+            else
+                MessageBox.Show("Error.");
         }
         #endregion
 

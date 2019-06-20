@@ -14,8 +14,9 @@ namespace Dima.Models
             NavigationManager.Instance.Navigate(ModesEnum.Main);
         }
 
-        public object CreateNewEngineer(EngineerAgroclimate engineer)
+        public bool CreateNewEngineer(EngineerAgroclimate engineer)
         {
+            PostgresService.Instance.AddEngineer(engineer);
             //var res = PostgresService.Instance().CreateEngineer(engineer);
 
             //if (res == System.Net.HttpStatusCode.NoContent)
@@ -27,7 +28,7 @@ namespace Dima.Models
             //    return AddResult.AlreadyCreated;
 
             //return AddResult.Error;
-            return null;
+            return true;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using Dima.Database.Entities;
+using Dima.Database.Models;
 
 namespace Dima.Database.Services
 {
@@ -25,8 +26,19 @@ namespace Dima.Database.Services
 
         private NpgsqlConnectionStringBuilder _builder;
 
+        private static string RequestsInfoQuery => "SELECT r.request_name as request_name, " +
+            "r.statereq as state, " +
+            "com.name_company as company_name, " +
+            "eng.last_name as engineer_name, " +
+            "bri.last_name as brigadier_name " +
+            "FROM request r " +
+            "INNER JOIN company com ON r.code_edrpou = com.code_edrpou " +
+            "INNER JOIN brigadier bri ON r.telephone_number_of_brigadier = bri.telephone_number_of_brigadier " +
+            "INNER JOIN engineeragroclimate eng ON r.tab_number = eng.tab_number;";
+
         private static string AllBrigadiersQuery => "SELECT * FROM brigadier";
         private static string AllRequestsQuery => "SELECT * FROM request";
+
 
         private static string BrigByEmailQuery(string email)
             => $"SELECT * FROM brigadier WHERE email = '{email}'";
@@ -43,6 +55,11 @@ namespace Dima.Database.Services
                 SslMode = SslMode.Require,
                 UseSslStream = true,
             };
+        }
+
+        public List<RequestsInfo> GetRequestsInfo()
+        {
+            return QueryInternal<RequestsInfo>(RequestsInfoQuery).ToList();
         }
 
         public List<Brigadier> GetAllBrigadiers()

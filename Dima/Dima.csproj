@@ -86,6 +86,7 @@
     <Compile Include="Database\Entities\Project.cs" />
     <Compile Include="Database\Entities\ReqState.cs" />
     <Compile Include="Database\Entities\Request.cs" />
+    <Compile Include="Database\Models\RequestsInfo.cs" />
     <Compile Include="Database\Services\PostgresService.cs" />
     <Compile Include="Models\AddEngineerModel.cs" />
     <Compile Include="Models\LoginModel.cs" />

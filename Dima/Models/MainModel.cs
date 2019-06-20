@@ -1,17 +1,17 @@
 ﻿using Dima.Database.Entities;
+using Dima.Database.Models;
 using Dima.Database.Services;
 using Dima.Managers;
 using Dima.Tools;
-using System;
 using System.Collections.Generic;
 
 namespace Dima.Models
 {
     class MainModel
     {
-        public List<Request> GetRequestItems()
+        public List<RequestsInfo> GetRequestItems()
         {
-            return PostgresService.Instance.GetAllRequest();
+            return PostgresService.Instance.GetRequestsInfo();
         }
 
         public void AddRequest()

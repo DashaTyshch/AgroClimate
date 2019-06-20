@@ -45,9 +45,10 @@
                   SelectionUnit="Cell">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Назва" Binding="{Binding Request_Name, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Замовник" Binding="{Binding Code_edrpou, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Інженер" Binding="{Binding Request_Name, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Стан" Binding="{Binding Request_Name, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Замовник" Binding="{Binding Company_Name, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Інженер" Binding="{Binding Engineer_Name, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Бригадир" Binding="{Binding Brigadier_Name, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Стан" Binding="{Binding State, Mode=OneWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         

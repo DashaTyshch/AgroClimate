@@ -1,4 +1,5 @@
 ﻿using Dima.Database.Entities;
+using Dima.Database.Models;
 using Dima.Database.Services;
 using Dima.Models;
 using Dima.Tools;
@@ -21,12 +22,13 @@ namespace Dima.ViewModels
         public MainViewModel()
         {
             Model = new MainModel();
+            //PostgresService.Instance.GetRequestsInfo();
 
-            RequestItems = new ObservableCollection<Request>(Model.GetRequestItems());
+            RequestItems = new ObservableCollection<RequestsInfo>(Model.GetRequestItems());
         }
 
-        private ObservableCollection<Request> _reguestItems;
-        public ObservableCollection<Request> RequestItems
+        private ObservableCollection<RequestsInfo> _reguestItems;
+        public ObservableCollection<RequestsInfo> RequestItems
         {
             get => _reguestItems;
             set

@@ -1,4 +1,5 @@
-﻿using Dima.Models;
+﻿using Dima.Database.Services;
+using Dima.Models;
 using Dima.Tools;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Dima.ViewModels
 
         public MainViewModel()
         {
+            PostgresService.Instance.GetAllBrigadiers();
             Model = new MainModel();
         }
 

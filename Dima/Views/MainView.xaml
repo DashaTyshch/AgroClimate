@@ -30,6 +30,7 @@
             <Button Content="+ інженера" Command="{Binding AddEngineerCommand}"></Button>
             <Button Content="+ бригадира"></Button>
             <Button Content="+ підприємство"></Button>
+            <Button Content="Статистика"></Button>
             <Button Content="Вихід" Command="{Binding ExitCommand}"></Button>
         </StackPanel>
         

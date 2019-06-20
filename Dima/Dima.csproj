@@ -87,12 +87,17 @@
     <Compile Include="Database\Entities\ReqState.cs" />
     <Compile Include="Database\Entities\Request.cs" />
     <Compile Include="Database\Services\PostgresService.cs" />
+    <Compile Include="Models\AddEngineerModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Tools\ModesEnum.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
+    <Compile Include="ViewModels\AddEngineerViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\AddEngineerView.xaml.cs">
+      <DependentUpon>AddEngineerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddRequestView.xaml.cs">
       <DependentUpon>AddRequestView.xaml</DependentUpon>
     </Compile>
@@ -109,6 +114,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddEngineerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddRequestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

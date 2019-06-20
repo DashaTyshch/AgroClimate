@@ -27,7 +27,7 @@
         <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
             <TextBlock Foreground="White" Margin="5 0 5 15" FontSize="15">Ви ввійшли як...</TextBlock>
             <Button Content="+ замовлення" Command="{Binding AddRequestCommand}"></Button>
-            <Button Content="+ інженера"></Button>
+            <Button Content="+ інженера" Command="{Binding AddEngineerCommand}"></Button>
             <Button Content="+ бригадира"></Button>
             <Button Content="+ підприємство"></Button>
             <Button Content="Вихід" Command="{Binding ExitCommand}"></Button>
@@ -39,12 +39,15 @@
         </TextBlock>
 
         <DataGrid IsReadOnly="True"
-                  FontSize="16">
+                  FontSize="16"
+                  ItemsSource="{Binding RequestItems}"
+                  AutoGenerateColumns="False"
+                  SelectionUnit="Cell">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Назва"/>
-                <DataGridTextColumn Header="Замовник"/>
-                <DataGridTextColumn Header="Інженер"/>
-                <DataGridTextColumn Header="Стан"/>
+                <DataGridTextColumn Header="Назва" Binding="{Binding Request_Name, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Замовник" Binding="{Binding Code_edrpou, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Інженер" Binding="{Binding Request_Name, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Стан" Binding="{Binding Request_Name, Mode=OneWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         

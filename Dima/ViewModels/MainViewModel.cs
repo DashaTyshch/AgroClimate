@@ -1,8 +1,10 @@
-﻿using Dima.Database.Services;
+﻿using Dima.Database.Entities;
+using Dima.Database.Services;
 using Dima.Models;
 using Dima.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -11,14 +13,27 @@ namespace Dima.ViewModels
     class MainViewModel : INotifyPropertyChanged
     {
         private ICommand _addRequestCommand;
+        private ICommand _addEngineerCommand;
         private ICommand _exitCommand;
 
         private MainModel Model { get; }
 
         public MainViewModel()
         {
-            PostgresService.Instance.GetAllBrigadiers();
             Model = new MainModel();
+
+            RequestItems = new ObservableCollection<Request>(Model.GetRequestItems());
+        }
+
+        private ObservableCollection<Request> _reguestItems;
+        public ObservableCollection<Request> RequestItems
+        {
+            get => _reguestItems;
+            set
+            {
+                _reguestItems = value;
+                InvokePropertyChanged(nameof(RequestItems));
+            }
         }
 
         #region Commands
@@ -46,6 +61,34 @@ namespace Dima.ViewModels
         }
 
         private bool AddRequestCanExecute(object obj)
+        {
+            return true;
+        }
+
+        public ICommand AddEngineerCommand
+        {
+            get
+            {
+                if (_addEngineerCommand == null)
+                {
+                    _addEngineerCommand = new RelayCommand<object>(AddEngineerExecute, AddEngineerCanExecute);
+                }
+
+                return _addEngineerCommand;
+            }
+            set
+            {
+                _addEngineerCommand = value;
+                InvokePropertyChanged(nameof(AddEngineerCommand));
+            }
+        }
+
+        private void AddEngineerExecute(object obj)
+        {
+            Model.AddEngineer();
+        }
+
+        private bool AddEngineerCanExecute(object obj)
         {
             return true;
         }

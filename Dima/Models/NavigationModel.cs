@@ -29,7 +29,9 @@ namespace Dima.Models
                 case ModesEnum.AddRequest:
                     _contentWindow.ContentControl.Content = new AddRequestView();
                     break;
-                
+                case ModesEnum.AddEngineer:
+                    _contentWindow.ContentControl.Content = new AddEngineerView();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
             }

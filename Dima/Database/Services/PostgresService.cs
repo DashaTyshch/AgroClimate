@@ -26,6 +26,7 @@ namespace Dima.Database.Services
         private NpgsqlConnectionStringBuilder _builder;
 
         private static string AllBrigadiersQuery => "SELECT * FROM brigadier";
+        private static string AllRequestsQuery => "SELECT * FROM request";
 
         private static string BrigByEmailQuery(string email)
             => $"SELECT * FROM brigadier WHERE email = '{email}'";
@@ -48,6 +49,12 @@ namespace Dima.Database.Services
         {
             return QueryInternal<Brigadier>(AllBrigadiersQuery).ToList();
         }
+
+        public List<Request> GetAllRequest()
+        {
+            return QueryInternal<Request>(AllRequestsQuery).ToList();
+        }
+
 
         public Brigadier GetByEmail(string email)
         {

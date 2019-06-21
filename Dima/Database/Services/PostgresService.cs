@@ -29,14 +29,23 @@ namespace Dima.Database.Services
         private static string RequestsInfoQuery => "SELECT r.request_name as request_name, " +
             "r.statereq as state, " +
             "com.name_company as company_name, " +
+            "com.code_edrpou AS company_id, " +
             "eng.last_name as engineer_name, " +
-            "bri.last_name as brigadier_name " +
+            "eng.tab_number AS engineer_id, " +
+            "bri.last_name as brigadier_name, " +
+            "bri.telephone_number_of_brigadier AS brigadier_id " +
             "FROM request r " +
             "INNER JOIN company com ON r.code_edrpou = com.code_edrpou " +
             "INNER JOIN brigadier bri ON r.telephone_number_of_brigadier = bri.telephone_number_of_brigadier " +
             "INNER JOIN engineeragroclimate eng ON r.tab_number = eng.tab_number;";
 
         private static string AllRequestsQuery => "SELECT * FROM request";
+        private static string GetRequestByIdQuery(string id)
+        {
+            return "SELECT * " +
+                   "FROM request " +
+                   $"WHERE request_name = '{id}';";
+        }
 
         private static string AllBrigadiersQuery => "SELECT * FROM brigadier";
         private static string BrigByEmailQuery(string email) => $"SELECT * FROM brigadier WHERE email = '{email}'";
@@ -73,6 +82,11 @@ namespace Dima.Database.Services
         public List<Request> GetAllRequest()
         {
             return QueryInternal<Request>(AllRequestsQuery).ToList();
+        }
+
+        public Request GetRequestById(string id)
+        {
+            return QueryInternal<Request>(GetRequestByIdQuery(id)).FirstOrDefault();
         }
 
         public List<Brigadier> GetAllBrigadiers()

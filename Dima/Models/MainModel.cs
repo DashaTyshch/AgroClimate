@@ -19,6 +19,28 @@ namespace Dima.Models
             NavigationManager.Instance.Navigate(ModesEnum.AddRequest);
         }
 
+        public void ProcessCellSelection(string column, RequestsInfo info)
+        {
+            switch (column)
+            {
+                case "Назва":
+                    var res = PostgresService.Instance.GetRequestById(info.Request_Name);
+                    NavigationManager.Instance.Navigate(ModesEnum.Request);
+                    break;
+                case "Замовник":
+                    //NavigationManager.Instance.Navigate(ModesEnum.Request);
+                    break;
+                case "Інженер":
+                    //NavigationManager.Instance.Navigate(ModesEnum.Request);
+                    break;
+                case "Бригадир":
+                    //NavigationManager.Instance.Navigate(ModesEnum.Request);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void Exit()
         {
             NavigationManager.Instance.Navigate(ModesEnum.Login);

@@ -7,27 +7,32 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
-// bla
+
 namespace Dima.ViewModels
 {
     class MainViewModel : INotifyPropertyChanged
     {
+        #region Private Fields
         private ICommand _addRequestCommand;
         private ICommand _addEngineerCommand;
+        private ICommand _cellCommand;
         private ICommand _exitCommand;
 
         private MainModel Model { get; }
 
+        private ObservableCollection<RequestsInfo> _reguestItems;
+        private DataGridCellInfo _cellInfo;
+        #endregion
+
         public MainViewModel()
         {
             Model = new MainModel();
-            //PostgresService.Instance.GetRequestsInfo();
 
             RequestItems = new ObservableCollection<RequestsInfo>(Model.GetRequestItems());
         }
 
-        private ObservableCollection<RequestsInfo> _reguestItems;
         public ObservableCollection<RequestsInfo> RequestItems
         {
             get => _reguestItems;
@@ -35,6 +40,16 @@ namespace Dima.ViewModels
             {
                 _reguestItems = value;
                 InvokePropertyChanged(nameof(RequestItems));
+            }
+        }
+
+        public DataGridCellInfo CellInfo
+        {
+            get { return _cellInfo; }
+            set
+            {
+                _cellInfo = value;
+                InvokePropertyChanged(nameof(CellInfo));
             }
         }
 
@@ -93,6 +108,37 @@ namespace Dima.ViewModels
         private bool AddEngineerCanExecute(object obj)
         {
             return true;
+        }
+
+        public ICommand CellClickedCommand
+        {
+            get
+            {
+                if (_cellCommand == null)
+                {
+                    _cellCommand = new RelayCommand<object>(CellClickExecute, CellClickCanExecute);
+                }
+                return _cellCommand;
+            }
+            set
+            {
+                _cellCommand = value;
+                InvokePropertyChanged(nameof(CellClickedCommand));
+            }
+        }
+
+        private bool CellClickCanExecute(object obj)
+        {
+            return true;
+        }
+
+        private void CellClickExecute(object obj)
+        {
+            var selectedSell = obj as DataGridCellInfo?;
+            var selectedInfo = selectedSell.Value.Item as RequestsInfo;
+            var column = selectedSell.Value.Column.Header.ToString();
+
+            Model.ProcessCellSelection(column, selectedInfo);
         }
 
         public ICommand ExitCommand

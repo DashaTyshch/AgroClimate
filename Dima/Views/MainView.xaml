@@ -43,7 +43,8 @@
                   FontSize="16"
                   ItemsSource="{Binding RequestItems}"
                   AutoGenerateColumns="False"
-                  SelectionUnit="Cell">
+                  SelectionUnit="Cell"
+                  CurrentCell="{Binding CellInfo, Mode=OneWayToSource}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Назва" Binding="{Binding Request_Name, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Замовник" Binding="{Binding Company_Name, Mode=OneWay}"/>
@@ -51,6 +52,9 @@
                 <DataGridTextColumn Header="Бригадир" Binding="{Binding Brigadier_Name, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Стан" Binding="{Binding State, Mode=OneWay}"/>
             </DataGrid.Columns>
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding CellClickedCommand}" CommandParameter="{Binding CellInfo}" />
+            </DataGrid.InputBindings>
         </DataGrid>
         
     </DockPanel>

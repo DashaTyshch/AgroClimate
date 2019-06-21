@@ -37,8 +37,8 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    
-    <Grid Background="#17252B">
+
+    <Grid Background="DarkSlateGray">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Border CornerRadius="10" Background="WhiteSmoke" Width="420">
                 <StackPanel Orientation="Vertical">

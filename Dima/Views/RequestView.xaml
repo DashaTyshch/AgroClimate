@@ -6,6 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="#43c2af"/>
@@ -24,11 +25,16 @@
 
     <StackPanel Background="DarkSlateGray">
 
-        <DockPanel Margin="20">
+        <DockPanel Margin="20" LastChildFill="True">
+            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
+                <Button Content="+ проект" Command="{Binding AddRequestCommand}"></Button>
+                <Button Content="Зберегти" Command="{Binding BackCommand}"></Button>
+            </StackPanel>
+            
             <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="22"
                    Foreground="White" FontWeight="DemiBold" Text="{Binding Request.Request_Name}"/>
             <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="22"
-                   Foreground="White" FontWeight="DemiBold" Text="Інфа про проект"/>
+                   Foreground="White" FontWeight="DemiBold" Text="Інфа про зам."/>
         </DockPanel>
         <DockPanel Grid.Row="1" LastChildFill="True" Margin="20">
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
@@ -37,18 +43,17 @@
             </StackPanel>
 
             <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="22"
-                   Foreground="White" FontWeight="DemiBold">
+                   Foreground="White" FontWeight="DemiBold" Margin="10">
             Проекти
             </TextBlock>
 
             <DataGrid IsReadOnly="True"
                   FontSize="16"
-                  ItemsSource="{Binding RequestItems}"
+                  ItemsSource="{Binding Projects}"
                   AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Номер" Binding="{Binding Request_Name, Mode=OneWay}"/>
-                    <DataGridTextColumn Header="Назва" Binding="{Binding Company_Name, Mode=OneWay}"/>
-                    <DataGridTextColumn Header="Затверджено" Binding="{Binding Engineer_Name, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Номер" Binding="{Binding Id_Project, Mode=OneWay}"/>
+                    <DataGridCheckBoxColumn Header="Затверджено" Binding="{Binding Status, Mode=OneWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

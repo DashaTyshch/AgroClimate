@@ -2,6 +2,7 @@
 using Dima.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
@@ -10,12 +11,14 @@ namespace Dima.ViewModels
     class RequestViewModel : INotifyPropertyChanged
     {
         private Request _request;
+        private ObservableCollection<Project> _projects;
         private readonly RequestModel _model;
 
         public RequestViewModel()
         {
             _model = new RequestModel();
             Request = Storage.GetInstance().SelectedRequest;
+            Projects = new ObservableCollection<Project>(_model.GetProjects(Request.Request_Name));
         }
 
         public Request Request
@@ -28,6 +31,15 @@ namespace Dima.ViewModels
             }
         }
 
+        public ObservableCollection<Project> Projects
+        {
+            get => _projects;
+            set
+            {
+                _projects = value;
+                InvokePropertyChanged(nameof(Projects));
+            }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

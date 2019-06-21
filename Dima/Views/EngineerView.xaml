@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="Dima.Views.EngineerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#43c2af"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Margin" Value="5 5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="DarkSlateGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBoxStyle">
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Margin" Value="0,5"/>
+        </Style>
+        <Style x:Key="Required" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
+            <Style.Triggers>
+                <Trigger Property="Text" Value="">
+                    <Setter Property="BorderBrush" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Border CornerRadius="10" Background="WhiteSmoke" Width="460">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Інженер" FontSize="20" HorizontalAlignment="Center" Foreground="#2DA46F"
+                           FontWeight="Bold" Margin="2,7,2,10"/>
+
+                    <Grid Margin="5" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="220"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Margin="40,5,0,5" Content="Табельний номер:" FontSize="16" HorizontalContentAlignment="Left"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1"
+                                 Text="{Binding Client.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource Required}"
+                                 Text="{Binding Client.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>
+
+
+                        <StackPanel  Margin="0 10" Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                            <Button Command="{Binding BackCommand}" FontSize="17" Margin="5,10">
+                                Назад
+                            </Button>
+                            <Button Content="Створити" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding AddClient}"
+                                    Visibility="{Binding IsCreation, Converter={StaticResource BoolToVis}}"/>
+                            <Button Content="Зберегти" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding SaveClient}"
+                                    Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -25,6 +25,7 @@ namespace Dima.Models
             {
                 case "Назва":
                     var res = PostgresService.Instance.GetRequestById(info.Request_Name);
+                    Storage.GetInstance().ChangeSelectedRequest(res);
                     NavigationManager.Instance.Navigate(ModesEnum.Request);
                     break;
                 case "Замовник":

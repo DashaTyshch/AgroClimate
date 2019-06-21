@@ -91,11 +91,14 @@
     <Compile Include="Models\AddEngineerModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\RequestModel.cs" />
+    <Compile Include="Models\Storage.cs" />
     <Compile Include="Tools\ModesEnum.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="ViewModels\AddEngineerViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RequestViewModel.cs" />
     <Compile Include="Views\AddEngineerView.xaml.cs">
       <DependentUpon>AddEngineerView.xaml</DependentUpon>
     </Compile>

@@ -12,5 +12,10 @@ namespace Dima.Models
         {
             return PostgresService.Instance.GetProjectsByReqName(id);
         }
+
+        internal void Download(Project selectedProject)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,18 +1,26 @@
 ﻿using Dima.Database.Entities;
 using Dima.Models;
+using Dima.Tools;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Dima.ViewModels
 {
     class RequestViewModel : INotifyPropertyChanged
     {
         private Request _request;
+        private Project _selectedProject;
         private ObservableCollection<Project> _projects;
         private readonly RequestModel _model;
+
+        private ICommand _saveFileCommand;
+        private ICommand _addProjectCommand;
 
         public RequestViewModel()
         {
@@ -31,6 +39,16 @@ namespace Dima.ViewModels
             }
         }
 
+        public Project SelectedProject
+        {
+            get => _selectedProject;
+            set
+            {
+                _selectedProject = value;
+                InvokePropertyChanged(nameof(SelectedProject));
+            }
+        }
+
         public ObservableCollection<Project> Projects
         {
             get => _projects;
@@ -40,6 +58,81 @@ namespace Dima.ViewModels
                 InvokePropertyChanged(nameof(Projects));
             }
         }
+
+        #region Commands
+
+        public ICommand AddProjectCommand
+        {
+            get
+            {
+                if (_addProjectCommand == null)
+                    _addProjectCommand = new RelayCommand<object>(AddProjectCommandExecute, AddProjectCommandCanExecute);
+                return _addProjectCommand;
+            }
+            set
+            {
+                _addProjectCommand = value;
+                InvokePropertyChanged(nameof(AddProjectCommand));
+            }
+        }
+
+        private bool AddProjectCommandCanExecute(object obj)
+        {
+            return true;
+        }
+
+        private void AddProjectCommandExecute(object obj)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                //Filter = "Files (*" + fileExtension + ")|*" + fileExtension,
+                Title = "Зберегти файл як",
+                CheckPathExists = true,
+                FileName = Request.Request_Name
+            };
+
+            if (saveFileDialog.ShowDialog() == false)
+                return;
+
+            File.WriteAllBytes(saveFileDialog.FileName, SelectedProject.ProjFile);
+        }
+
+        public ICommand SaveFileCommand
+        {
+            get
+            {
+                if (_saveFileCommand == null)
+                    _saveFileCommand = new RelayCommand<object>(SaveFileExecute, SaveFileCanExecute);
+                return _saveFileCommand;
+            }
+            set
+            {
+                _saveFileCommand = value;
+                InvokePropertyChanged(nameof(SaveFileCommand));
+            }
+        }
+
+        private bool SaveFileCanExecute(object obj)
+        {
+            return SelectedProject != null;
+        }
+
+        private void SaveFileExecute(object obj)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                //Filter = "Files (*" + fileExtension + ")|*" + fileExtension,
+                Title = "Зберегти файл як",
+                CheckPathExists = true,
+                FileName = Request.Request_Name
+            };
+
+            if (saveFileDialog.ShowDialog() == false)
+                return;
+
+            File.WriteAllBytes(saveFileDialog.FileName, SelectedProject.ProjFile);
+        }
+        #endregion
 
 
         public event PropertyChangedEventHandler PropertyChanged;

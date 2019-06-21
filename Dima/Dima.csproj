@@ -89,6 +89,7 @@
     <Compile Include="Database\Models\RequestsInfo.cs" />
     <Compile Include="Database\Services\PostgresService.cs" />
     <Compile Include="Models\AddEngineerModel.cs" />
+    <Compile Include="Models\EngineerModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\RequestModel.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Tools\ModesEnum.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="ViewModels\AddEngineerViewModel.cs" />
+    <Compile Include="ViewModels\EngineerViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RequestViewModel.cs" />
@@ -104,6 +106,9 @@
     </Compile>
     <Compile Include="Views\AddRequestView.xaml.cs">
       <DependentUpon>AddRequestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EngineerView.xaml.cs">
+      <DependentUpon>EngineerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -126,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EngineerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

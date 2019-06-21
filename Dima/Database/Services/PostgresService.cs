@@ -65,6 +65,10 @@ namespace Dima.Database.Services
                    $"{ (engineer.Email == null ? $"'{engineer.Email}'" : "NULL") }); ";
         }
 
+        private static string PojectsByReqNameQuery(string reqname) =>
+            "SELECT * " +
+            "FROM project " +
+            $"WHERE request_name = '{reqname}'";
 
         private PostgresService()
         {
@@ -94,6 +98,11 @@ namespace Dima.Database.Services
         public Request GetRequestById(string id)
         {
             return QueryInternal<Request>(GetRequestByIdQuery(id)).FirstOrDefault();
+        }
+
+        public List<Project> GetProjectsByReqName(string reqname)
+        {
+            return QueryInternal<Project>(PojectsByReqNameQuery(reqname)).ToList();
         }
 
         public List<Brigadier> GetAllBrigadiers()

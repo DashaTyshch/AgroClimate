@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 using Dima.Database.Entities;
 using Dima.Database.Models;
+using System.Security.Cryptography;
 
 namespace Dima.Database.Services
 {
@@ -48,8 +49,13 @@ namespace Dima.Database.Services
         }
 
         private static string AllBrigadiersQuery => "SELECT * FROM brigadier";
+
         private static string BrigByEmailQuery(string email) => $"SELECT * FROM brigadier WHERE email = '{email}'";
 
+        private static string AuthQuery(string login, string pwd) =>
+            "SELECT fullname " +
+            "FROM manager " +
+            $"WHERE login = '{login}' AND pwdhash = '{Hash(pwd)}'";
 
         private static string AddEngineerQuery(EngineerAgroclimate engineer)
         {
@@ -79,6 +85,7 @@ namespace Dima.Database.Services
             return QueryInternal<RequestsInfo>(RequestsInfoQuery).ToList();
         }
 
+
         public List<Request> GetAllRequest()
         {
             return QueryInternal<Request>(AllRequestsQuery).ToList();
@@ -92,6 +99,11 @@ namespace Dima.Database.Services
         public List<Brigadier> GetAllBrigadiers()
         {
             return QueryInternal<Brigadier>(AllBrigadiersQuery).ToList();
+        }
+
+        public string Auth(string login, string pwd)
+        {
+            return QuerySingleOrDefaultInternal<string>(AuthQuery(login, pwd));
         }
 
         public Brigadier GetByEmail(string email)
@@ -121,6 +133,21 @@ namespace Dima.Database.Services
 
         }
 
+        private T QuerySingleOrDefaultInternal<T>(string sql)
+        {
+            T result;
+            var conn = new NpgsqlConnection(_builder.ToString())
+            {
+                // dirty hack. must be removed later
+                UserCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true
+            };
+            using (conn)
+            {
+                result = conn.QuerySingleOrDefault<T>(sql);
+            }
+            return result;
+        }
+
         private void ExecuteInternal(string sql)
         {
             var conn = new NpgsqlConnection(_builder.ToString())
@@ -131,6 +158,23 @@ namespace Dima.Database.Services
             {
                 conn.Execute(sql);
             }
+        }
+
+
+        private static string Hash(string value)
+        {
+            var sb = new StringBuilder();
+
+            using (var hash = SHA256.Create())
+            {
+                var enc = Encoding.UTF8;
+                var result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (var b in result)
+                    sb.Append(b.ToString("x2"));
+            }
+
+            return sb.ToString();
         }
     }
 }

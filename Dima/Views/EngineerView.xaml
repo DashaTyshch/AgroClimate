@@ -36,6 +36,12 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
     </UserControl.Resources>
     
     <Grid>
@@ -59,20 +65,44 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Margin="40,5,0,5" Content="Табельний номер:" FontSize="16" HorizontalContentAlignment="Left"/>
+                        <Label Grid.Row="0" Margin="40,5,0,5" Content="Ім'я:" FontSize="16" HorizontalContentAlignment="Left"/>
                         <TextBlock Grid.Row="0" Grid.Column="1"
-                                 Text="{Binding Client.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Engineer.First_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource Required}"
+                        <!--<TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource Required}"
                                  Text="{Binding Client.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>
+                                 Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>-->
+                        
+                        <Label Grid.Row="1" Margin="40,5,0,5" Content="По батькові:" FontSize="16" HorizontalContentAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding Engineer.Patronym, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
+                        
+                        <Label Grid.Row="2" Margin="40,5,0,5" Content="Прізвище:" FontSize="16" HorizontalContentAlignment="Left"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1"
+                                 Text="{Binding Engineer.Last_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
+                        
+                        <Label Grid.Row="3" Margin="40,5,0,5" Content="Телефон:" FontSize="16" HorizontalContentAlignment="Left"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1"
+                                 Text="{Binding Engineer.Telephone_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
 
+                        <Label Grid.Row="4" Margin="40,5,0,5" Content="Пошта:" FontSize="16" HorizontalContentAlignment="Left"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1"
+                                 Text="{Binding Engineer.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
+
+                        <Label Grid.Row="5" Margin="40,5,0,5" Content="Табельний номер:" FontSize="16" HorizontalContentAlignment="Left"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1"
+                                 Text="{Binding Engineer.Tab_Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
 
                         <StackPanel  Margin="0 10" Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                             <Button Command="{Binding BackCommand}" FontSize="17" Margin="5,10">
                                 Назад
                             </Button>
-                            <Button Content="Створити" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding AddClient}"
+                            <Button Content="Редагувати" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding AddClient}"
                                     Visibility="{Binding IsCreation, Converter={StaticResource BoolToVis}}"/>
                             <Button Content="Зберегти" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding SaveClient}"
                                     Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>

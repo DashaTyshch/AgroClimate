@@ -9,6 +9,7 @@ namespace Dima.Models
         private static Storage _instance;
 
         public Request SelectedRequest { get; private set; }
+        public EngineerAgroclimate SelectedEngineer { get; private set; }
 
         private Storage() { }
 
@@ -22,6 +23,11 @@ namespace Dima.Models
         public void ChangeSelectedRequest(Request request)
         {
             SelectedRequest = request;
+        }
+
+        public void ChangeSelectedEngineer(EngineerAgroclimate engineer)
+        {
+            SelectedEngineer = engineer;
         }
 
     }

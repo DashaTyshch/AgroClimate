@@ -32,7 +32,9 @@ namespace Dima.Models
                     //NavigationManager.Instance.Navigate(ModesEnum.Request);
                     break;
                 case "Інженер":
-                    //NavigationManager.Instance.Navigate(ModesEnum.Request);
+                    var engineer = PostgresService.Instance.GetEngineer(info.Engineer_Id);
+                    Storage.GetInstance().ChangeSelectedEngineer(engineer);
+                    NavigationManager.Instance.Navigate(ModesEnum.Enginner);
                     break;
                 case "Бригадир":
                     //NavigationManager.Instance.Navigate(ModesEnum.Request);

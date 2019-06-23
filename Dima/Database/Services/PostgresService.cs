@@ -80,6 +80,11 @@ namespace Dima.Database.Services
                    $"{ (engineer.Email != null ? $"'{engineer.Email}'" : "NULL") }); ";
         }
 
+        private static string GetEngineerQuery(int tabNum) => 
+            "SELECT * " +
+            "FROM engineerAgroclimate " +
+            $"WHERE tab_number = {tabNum} ;";
+
         private static string PojectsByReqNameQuery(string reqname) =>
             "SELECT * " +
             "FROM project " +
@@ -129,6 +134,11 @@ namespace Dima.Database.Services
             return QueryInternal<Brigadier>(AllBrigadiersQuery).ToList();
         }
 
+        public void AddBrigadier(Brigadier brigadier)
+        {
+            ExecuteInternal(AddBrigadierQuery(brigadier));
+        }
+
         public string Auth(string login, string pwd)
         {
             return QuerySingleOrDefaultInternal<string>(AuthQuery(login, pwd));
@@ -144,9 +154,9 @@ namespace Dima.Database.Services
             ExecuteInternal(AddEngineerQuery(engineer));
         }
 
-        public void AddBrigadier(Brigadier brigadier)
+        public EngineerAgroclimate GetEngineer(int tabNum)
         {
-            ExecuteInternal(AddBrigadierQuery(brigadier));
+            return QueryInternal<EngineerAgroclimate>(GetEngineerQuery(tabNum)).FirstOrDefault();
         }
 
         public void AddProject(byte[] file, string request)

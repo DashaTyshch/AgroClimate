@@ -81,7 +81,7 @@ namespace Dima.ViewModels
         {
             return true;
         }
-        // analogichno dlya brigadira
+
         public ICommand AddEngineerCommand
         {
             get
@@ -109,7 +109,7 @@ namespace Dima.ViewModels
         {
             return true;
         }
-        // AddBrigadierCommand
+  
         public ICommand AddBrigadierCommand
         {
             get
@@ -137,7 +137,6 @@ namespace Dima.ViewModels
         {
             return true;
         }
-        //
 
         public ICommand CellClickedCommand
         {

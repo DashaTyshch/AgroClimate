@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dima.Database.Entities;
+using Dima.Database.Services;
 
 namespace Dima.Models
 {
-    class EngineerModel
+    public class EngineerModel
     {
+        public void UpdateEngineer(EngineerAgroclimate engineer)
+        {
+            PostgresService.Instance.UpdateEngineer(engineer);
+        }
     }
 }

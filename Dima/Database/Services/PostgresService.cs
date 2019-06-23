@@ -85,6 +85,15 @@ namespace Dima.Database.Services
             "FROM engineerAgroclimate " +
             $"WHERE tab_number = {tabNum} ;";
 
+        private static string UpdateEngineerQuery(EngineerAgroclimate engineer) =>
+            "UPDATE engineerAgroclimate " +
+            $"SET telephone_number = {engineer.Telephone_Number}, " +
+                  $"last_name = {engineer.Last_Name}, " +
+                  $"first_name = {engineer.First_Name}, " +
+                  $"patronym = {engineer.Patronym}, " +
+                  $"email = {(engineer.Email != null ? $"'{engineer.Email}'" : "NULL")} " +
+            $"WHERE tab_number = {engineer.Tab_Number};";
+
         private static string PojectsByReqNameQuery(string reqname) =>
             "SELECT * " +
             "FROM project " +
@@ -157,6 +166,11 @@ namespace Dima.Database.Services
         public EngineerAgroclimate GetEngineer(int tabNum)
         {
             return QueryInternal<EngineerAgroclimate>(GetEngineerQuery(tabNum)).FirstOrDefault();
+        }
+
+        public void UpdateEngineer(EngineerAgroclimate engineer)
+        {
+            ExecuteInternal(UpdateEngineerQuery(engineer));
         }
 
         public void AddProject(byte[] file, string request)

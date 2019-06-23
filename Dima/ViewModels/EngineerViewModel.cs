@@ -17,6 +17,8 @@ namespace Dima.ViewModels
         private bool _isEditing;
 
         private ICommand _editCommand;
+        private ICommand _saveCommand;
+        private ICommand _backCommand;
 
         private EngineerModel Model { get; }
         #endregion
@@ -86,6 +88,65 @@ namespace Dima.ViewModels
         {
             IsViewing = false;
             IsEditing = true;
+        }
+
+        public ICommand SaveCommand
+        {
+            get
+            {
+                if (_saveCommand == null)
+                    _saveCommand = new RelayCommand<object>(SaveCommandExecute, SaveCommandCanExecute);
+                return _saveCommand;
+            }
+            set
+            {
+                _saveCommand = value;
+                InvokePropertyChanged(nameof(SaveCommand));
+            }
+        }
+
+        private bool SaveCommandCanExecute(object obj)
+        {
+            return !string.IsNullOrEmpty(Engineer.First_Name) &&
+                   !string.IsNullOrEmpty(Engineer.Patronym) &&
+                   !string.IsNullOrEmpty(Engineer.Last_Name) &&
+                   !string.IsNullOrEmpty(Engineer.Telephone_Number);
+        }
+
+        private void SaveCommandExecute(object obj)
+        {
+            Model.UpdateEngineer(Engineer);
+
+            IsViewing = true;
+            IsEditing = false;
+        }
+
+        public ICommand BackCommand
+        {
+            get
+            {
+                if (_backCommand == null)
+                    _backCommand = new RelayCommand<object>(BackCommandExecute, BackCommandCanExecute);
+                return _backCommand;
+            }
+            set
+            {
+                _saveCommand = value;
+                InvokePropertyChanged(nameof(BackCommand));
+            }
+        }
+
+        private bool BackCommandCanExecute(object obj)
+        {
+            return true;
+        }
+
+        private void BackCommandExecute(object obj)
+        {
+            Model.UpdateEngineer(Engineer);
+
+            IsViewing = true;
+            IsEditing = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

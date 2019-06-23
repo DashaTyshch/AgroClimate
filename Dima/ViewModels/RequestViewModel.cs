@@ -83,18 +83,28 @@ namespace Dima.ViewModels
 
         private void AddProjectCommandExecute(object obj)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            byte[] fileContent;
+            var filePath = string.Empty;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog()
             {
-                //Filter = "Files (*" + fileExtension + ")|*" + fileExtension,
-                Title = "Зберегти файл як",
+                InitialDirectory = @"C:\",
+                RestoreDirectory = true,
+                Title = "Виберіть файл для завантаження",
+                Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*",
+                CheckFileExists = true,
                 CheckPathExists = true,
-                FileName = Request.Request_Name
+
             };
 
-            if (saveFileDialog.ShowDialog() == false)
-                return;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                filePath = openFileDialog.FileName;
+                fileContent = File.ReadAllBytes(filePath);
 
-            File.WriteAllBytes(saveFileDialog.FileName, SelectedProject.ProjFile);
+                _model.CreateProject(fileContent);
+            }
+
         }
 
         public ICommand SaveFileCommand

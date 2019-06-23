@@ -13,9 +13,14 @@ namespace Dima.Models
             return PostgresService.Instance.GetProjectsByReqName(id);
         }
 
-        internal void Download(Project selectedProject)
+        public void Download(Project selectedProject)
         {
             throw new NotImplementedException();
+        }
+
+        public void CreateProject(byte[] fileContent)
+        {
+            PostgresService.Instance.AddProject(fileContent, "Агроавіс-1");
         }
     }
 }

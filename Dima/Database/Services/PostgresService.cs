@@ -8,6 +8,7 @@ using Dapper;
 using Dima.Database.Entities;
 using Dima.Database.Models;
 using System.Security.Cryptography;
+using NpgsqlTypes;
 
 namespace Dima.Database.Services
 {
@@ -56,7 +57,7 @@ namespace Dima.Database.Services
             "SELECT fullname " +
             "FROM manager " +
             $"WHERE login = '{login}' AND pwdhash = '{Hash(pwd)}'";
-        //add bri query too
+
         private static string AddBrigadierQuery(Brigadier brigadier)
         {
             return "INSERT INTO brigadier "+ 
@@ -69,11 +70,8 @@ namespace Dima.Database.Services
                 $" {brigadier.Daily_Salary}, " +
                 $"{brigadier.Car_Availability}, " +
                 $"{brigadier.Mount_Kit_Availability} ); ";
-            ////return; "" +
-            //return "INSERT INTO brigadier " +
-            //    $
-            ////       ""
         }
+
         private static string AddEngineerQuery(EngineerAgroclimate engineer)
         {
             return "INSERT INTO engineeragroclimate " +
@@ -86,6 +84,10 @@ namespace Dima.Database.Services
             "SELECT * " +
             "FROM project " +
             $"WHERE request_name = '{reqname}'";
+
+        private static string AddProjectQuery(byte[] file) =>
+            "INSERT INTO project (projFile) " +
+            $"VALUES({file});";
 
         private PostgresService()
         {
@@ -145,6 +147,26 @@ namespace Dima.Database.Services
         public void AddBrigadier(Brigadier brigadier)
         {
             ExecuteInternal(AddBrigadierQuery(brigadier));
+        }
+
+        public void AddProject(byte[] file, string request)
+        {
+            
+            var conn = new NpgsqlConnection(_builder.ToString())
+            {
+                UserCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true
+            };
+            using (conn)
+            {
+                conn.Open();
+                NpgsqlCommand insertCmd =
+                    new NpgsqlCommand("INSERT INTO project (request_name, projFile) " +
+                             $"VALUES('{request}', :dataParam);", conn);
+                NpgsqlParameter param = new NpgsqlParameter("dataParam", NpgsqlDbType.Bytea);
+                param.Value = file;
+                insertCmd.Parameters.Add(param);
+                insertCmd.ExecuteNonQuery();
+            }
         }
 
         private IEnumerable<T> QueryInternal<T>(string sql)

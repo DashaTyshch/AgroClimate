@@ -295,5 +295,14 @@ namespace Dima.Database.Services
 
             return sb.ToString();
         }
+
+        public List<Request> RequestsByEngineer(int tab_Number)
+        {
+            return QueryInternal<Request>(
+                "SELECT * " +
+                "FROM request " +
+                $"WHERE tab_number = {tab_Number}"
+                ).ToList();
+        }
     }
 }

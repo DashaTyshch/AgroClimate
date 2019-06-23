@@ -118,6 +118,8 @@
                                     Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
                             <Button Content="Зберегти" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding SaveCommand}"
                                     Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>
+                            <Button Content="Експортувати звіт" FontSize="17" Margin="5,10" 
+                                    Background="#17A210" Command="{Binding ReportCommand}"/>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

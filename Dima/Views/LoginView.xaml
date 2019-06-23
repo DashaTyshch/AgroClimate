@@ -11,10 +11,11 @@
                 <TextBlock FontSize="26" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center">Вхід</TextBlock>
                 <Separator/>
                 <TextBlock Foreground="White" FontSize="18">Логін:</TextBlock>
-                <TextBox Background="#545d6a" Foreground="White" FontSize="17" Width="220"/>
+                <TextBox  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Background="#545d6a" Foreground="White" FontSize="17" Width="220"/>
                 <TextBlock Foreground="White" FontSize="18">Пароль:</TextBlock>
-                <PasswordBox Background="#545d6a" Foreground="White" FontSize="17" Width="220"/>
-                <Button Content="Ввійти" Command="{Binding LoginCommand}" Background="White" Foreground="#545d6a"
+                <PasswordBox x:Name="MyPwdBox" Background="#545d6a" Foreground="White" FontSize="17" Width="220"/>
+                <Button Content="Ввійти" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=MyPwdBox}" Background="White" Foreground="#545d6a"
                         Margin="0 30 0 0" FontSize="20" FontWeight="DemiBold"/>
             </StackPanel>
         </Border>

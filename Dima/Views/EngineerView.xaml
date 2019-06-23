@@ -87,7 +87,7 @@
                                  Text="{Binding Engineer.Last_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
                         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource Required}"
-                                 Text="{Binding Engineer.Patronym, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Engineer.Last_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>
 
                         <Label Grid.Row="3" Margin="40,5,0,5" Content="Телефон:" FontSize="16" HorizontalContentAlignment="Left"/>
@@ -116,7 +116,7 @@
                             </Button>
                             <Button Content="Редагувати" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding EditCommand}"
                                     Visibility="{Binding IsViewing, Converter={StaticResource BoolToVis}}"/>
-                            <Button Content="Зберегти" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding SaveClient}"
+                            <Button Content="Зберегти" FontSize="17" Margin="2,10" Background="#17A210" Command="{Binding SaveCommand}"
                                     Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>
                         </StackPanel>
                     </Grid>

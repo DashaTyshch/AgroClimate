@@ -87,10 +87,10 @@ namespace Dima.Database.Services
 
         private static string UpdateEngineerQuery(EngineerAgroclimate engineer) =>
             "UPDATE engineerAgroclimate " +
-            $"SET telephone_number = {engineer.Telephone_Number}, " +
-                  $"last_name = {engineer.Last_Name}, " +
-                  $"first_name = {engineer.First_Name}, " +
-                  $"patronym = {engineer.Patronym}, " +
+            $"SET telephone_number = '{engineer.Telephone_Number}', " +
+                  $"last_name = '{engineer.Last_Name}', " +
+                  $"first_name = '{engineer.First_Name}', " +
+                  $"patronym = '{engineer.Patronym}', " +
                   $"email = {(engineer.Email != null ? $"'{engineer.Email}'" : "NULL")} " +
             $"WHERE tab_number = {engineer.Tab_Number};";
 

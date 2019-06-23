@@ -4,6 +4,7 @@ using Dima.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Dima.ViewModels
@@ -131,7 +132,7 @@ namespace Dima.ViewModels
             }
             set
             {
-                _saveCommand = value;
+                _backCommand = value;
                 InvokePropertyChanged(nameof(BackCommand));
             }
         }
@@ -143,10 +144,20 @@ namespace Dima.ViewModels
 
         private void BackCommandExecute(object obj)
         {
-            Model.UpdateEngineer(Engineer);
+            if (IsEditing)
+            {
+                MessageBoxResult result = MessageBox.Show("Ви зберегли зміни? Вийти?", "Увага!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Model.GoBack();
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
 
-            IsViewing = true;
-            IsEditing = false;
+            Model.GoBack();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

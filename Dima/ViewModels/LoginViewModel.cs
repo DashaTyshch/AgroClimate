@@ -1,6 +1,8 @@
 ﻿using Dima.Models;
 using Dima.Tools;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Dima.ViewModels
@@ -10,6 +12,21 @@ namespace Dima.ViewModels
         private ICommand _loginCommand;
 
         private LoginModel Model { get; }
+
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    InvokePropertyChanged(nameof(Name));
+                }
+            }
+        }
 
         public LoginViewModel()
         {
@@ -37,7 +54,10 @@ namespace Dima.ViewModels
         private void LoginExecute(object obj)
         {
             // TODO: Add parameters
-            Model.Login();
+            var btn = obj as PasswordBox;
+
+            if (!Model.Login(Name, btn.Password))
+                MessageBox.Show("Невірний логін або пароль!");
         }
 
         private bool LoginCanExecute(object obj)

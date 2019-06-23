@@ -68,7 +68,7 @@
         </DockPanel>
         <DockPanel Grid.Row="1" LastChildFill="True" Margin="20">
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
-                <Button Content="Затвердити" Command="{Binding AddRequestCommand}"></Button>
+                <Button Content="Затвердити" Command="{Binding ConfirmCommand}"></Button>
                 <Button Content="Завантажити файл" Command="{Binding SaveFileCommand}"></Button>
                 <Button Content="Назад" Command="{Binding BackCommand}"></Button>
             </StackPanel>

@@ -95,7 +95,7 @@ namespace Dima.ViewModels
                 InitialDirectory = @"C:\",
                 RestoreDirectory = true,
                 Title = "Виберіть файл для завантаження",
-                Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*",
+                Filter = "docx files (*.docx)|*.docx",
                 CheckFileExists = true,
                 CheckPathExists = true,
 
@@ -135,7 +135,7 @@ namespace Dima.ViewModels
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                //Filter = "Files (*" + fileExtension + ")|*" + fileExtension,
+                Filter = "docx files (*.docx)|*.docx",
                 Title = "Зберегти файл як",
                 CheckPathExists = true,
                 FileName = Request.Request_Name

@@ -49,6 +49,10 @@ namespace Dima.Database.Services
                    $"WHERE request_name = '{id}';";
         }
 
+        private static string AddRequestQuery(string name, int duration, Company selectedCompany, EngineerAgroclimate selectedEngineer, Brigadier selectedBrigadier) =>
+            "INSERT INTO request (request_name, tab_number, approximate_duration, code_edrpou, telephone_number_of_brigadier) " +
+            $"VALUES ('{name}', {selectedEngineer.Tab_Number}, {duration}, {selectedCompany.Code_edrpou}, {selectedBrigadier.Telephone_Number_Of_Brigadier});";
+
         private static string AllBrigadiersQuery => "SELECT * FROM brigadier";
 
         private static string BrigByEmailQuery(string email) => $"SELECT * FROM brigadier WHERE email = '{email}'";
@@ -94,6 +98,11 @@ namespace Dima.Database.Services
                   $"email = {(engineer.Email != null ? $"'{engineer.Email}'" : "NULL")} " +
             $"WHERE tab_number = {engineer.Tab_Number};";
 
+        private static string GetAllEngineersQuery() =>
+            "SELECT * " +
+            "FROM engineerAgroclimate";
+
+
         private static string PojectsByReqNameQuery(string reqname) =>
             "SELECT * " +
             "FROM project " +
@@ -102,6 +111,13 @@ namespace Dima.Database.Services
         private static string AddProjectQuery(byte[] file) =>
             "INSERT INTO project (projFile) " +
             $"VALUES({file});";
+
+        private static string GetAllCompaniesQuery() =>
+            "SELECT * " +
+            "FROM company";
+
+
+
 
         private PostgresService()
         {
@@ -131,6 +147,11 @@ namespace Dima.Database.Services
         public Request GetRequestById(string id)
         {
             return QueryInternal<Request>(GetRequestByIdQuery(id)).FirstOrDefault();
+        }
+
+        public void AddRequest(string name, int duration, Company selectedCompany, EngineerAgroclimate selectedEngineer, Brigadier selectedBrigadier)
+        {
+            ExecuteInternal(AddRequestQuery(name, duration, selectedCompany, selectedEngineer, selectedBrigadier));
         }
 
         public List<Project> GetProjectsByReqName(string reqname)
@@ -173,6 +194,11 @@ namespace Dima.Database.Services
             ExecuteInternal(UpdateEngineerQuery(engineer));
         }
 
+        public List<EngineerAgroclimate> GetAllEngineers()
+        {
+            return QueryInternal<EngineerAgroclimate>(GetAllEngineersQuery()).ToList();
+        }
+
         public void AddProject(byte[] file, string request)
         {
             
@@ -192,6 +218,12 @@ namespace Dima.Database.Services
                 insertCmd.ExecuteNonQuery();
             }
         }
+
+        public List<Company> GetAllCompanies()
+        {
+            return QueryInternal<Company>(GetAllCompaniesQuery()).ToList(); 
+        }
+
 
         private IEnumerable<T> QueryInternal<T>(string sql)
         {

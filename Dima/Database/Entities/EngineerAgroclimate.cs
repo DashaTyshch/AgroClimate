@@ -9,5 +9,6 @@ namespace Dima.Database.Entities
         public string First_Name { get; set; }
         public string Patronym { get; set; }
         public string Email { get; set; }
+        public string Full { get => $"{Last_Name } {First_Name}"; } 
     }
 }

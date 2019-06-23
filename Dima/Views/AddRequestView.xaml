@@ -25,35 +25,40 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel>
-                        <TextBlock Foreground="White" FontSize="18" Text="Дата початку:"/>
-                        <DatePicker />
+                        <TextBlock Foreground="White" FontSize="18" Text="Час виконання (дні):"/>
+                        <TextBox FontSize="17" Width="200" Text="{Binding Duration, Mode=OneWayToSource}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <TextBlock Foreground="White" FontSize="18" Text="Час виконання (дні):"/>
-                        <TextBox FontSize="17" Width="200"/>
+                        <TextBlock Foreground="White" FontSize="18">Бригадир:</TextBlock>
+                        <ComboBox ItemsSource="{Binding BrigadierList}" SelectedItem="{Binding SelectedBrigadier}" FontSize="17"
+                                  DisplayMemberPath="Full" SelectedValuePath="Telephone_Number_Of_Brigadier"
+                                  Width="120" Height="30" VerticalContentAlignment="Center"
+                                  IsTextSearchEnabled="True" IsEditable="True" MinWidth="200">
+                        </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="0 10">
                         <TextBlock Foreground="White" FontSize="18">Підприємство:</TextBlock>
-                        <ComboBox x:Name="comboBox" MinWidth="200" IsEditable="True" IsTextSearchEnabled="True"
-                          FontSize="17">
-                            <ComboBoxItem>dsf gd</ComboBoxItem>
-                            <ComboBoxItem>asf gd</ComboBoxItem>
-                            <ComboBoxItem>dsf gd</ComboBoxItem>
-                            <ComboBoxItem>hsf gd</ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 10">
-                        <TextBlock Foreground="White" FontSize="18">Інженер:</TextBlock>
-                        <ComboBox MinWidth="200" IsEditable="True" IsTextSearchEnabled="True"
-                          FontSize="17">
-                            <ComboBoxItem>dsf gd</ComboBoxItem>
-                            <ComboBoxItem>asf gd</ComboBoxItem>
-                            <ComboBoxItem>dsf gd</ComboBoxItem>
-                            <ComboBoxItem>hsf gd</ComboBoxItem>
+                        <ComboBox ItemsSource="{Binding CompanyList}" SelectedItem="{Binding SelectedCompany}" FontSize="17"
+                                  DisplayMemberPath="Name_Company" SelectedValuePath="Code_edrpou"
+                                  Width="120" Height="30" VerticalContentAlignment="Center"
+                                  IsTextSearchEnabled="True" IsEditable="True" MinWidth="200">
                         </ComboBox>
                     </StackPanel>
 
-                    <Button Content="Відмінити" Command="{Binding CancelCommand}" Background="White" Foreground="#545d6a"
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 10">
+                        <TextBlock Foreground="White" FontSize="18">Інженер:</TextBlock>
+                        <ComboBox ItemsSource="{Binding EngineerList}" SelectedItem="{Binding SelectedEngineer}" FontSize="17"
+                                  DisplayMemberPath="Full" SelectedValuePath="Tab_Number"
+                                  Width="120" Height="30" VerticalContentAlignment="Center"
+                                  IsTextSearchEnabled="True" IsEditable="True" MinWidth="200">
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.ColumnSpan="2" Grid.Row="2">
+                        <TextBlock Text="Назва замовлення:" Foreground="White" FontSize="18" HorizontalAlignment="Center"/>
+                        <TextBox FontSize="17" Padding="5" Text="{Binding Name}"/>
+                    </StackPanel>
+                    <Button Content="Відмінити" Command="{Binding BackCommand}" Background="White" Foreground="#545d6a"
                         Margin="10 30 10 0" FontSize="20" FontWeight="DemiBold"
                             Grid.Row="4"/>
                     <Button Content="Створити" Command="{Binding AddCommand}" Background="White" Foreground="#545d6a"

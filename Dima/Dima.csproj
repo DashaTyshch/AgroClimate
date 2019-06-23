@@ -92,6 +92,7 @@
     <Compile Include="Database\Services\PostgresService.cs" />
     <Compile Include="Models\AddBrigadierModel.cs" />
     <Compile Include="Models\AddEngineerModel.cs" />
+    <Compile Include="Models\AddrequestModel.cs" />
     <Compile Include="Models\EngineerModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MainModel.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="ViewModels\AddEngineerViewModel.cs" />
     <Compile Include="ViewModels\AddBrigadierViewModel.cs" />
+    <Compile Include="ViewModels\AddRequestViewModel.cs" />
     <Compile Include="ViewModels\EngineerViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

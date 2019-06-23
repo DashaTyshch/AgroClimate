@@ -12,5 +12,7 @@ namespace Dima.Database.Entities
         public double Daily_Salary { get; set; }
         public bool Car_Availability { get; set; }
         public bool Mount_Kit_Availability { get; set; }
+
+        public string Full { get => $"{Last_Name} {First_Name}"; }
     }
 }

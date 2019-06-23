@@ -24,7 +24,7 @@ namespace Dima.Models
                     _contentWindow.ContentControl.Content = new LoginView();
                     break;
                 case ModesEnum.Main:
-                    _contentWindow.ContentControl.Content = _mainView;
+                    _contentWindow.ContentControl.Content = new MainView();
                     break;
                 case ModesEnum.AddRequest:
                     _contentWindow.ContentControl.Content = new AddRequestView();

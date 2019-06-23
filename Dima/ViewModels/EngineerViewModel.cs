@@ -18,6 +18,7 @@ namespace Dima.ViewModels
         private bool _isEditing;
 
         private ICommand _editCommand;
+        private ICommand _reportCommand;
         private ICommand _saveCommand;
         private ICommand _backCommand;
 
@@ -103,6 +104,24 @@ namespace Dima.ViewModels
             {
                 _saveCommand = value;
                 InvokePropertyChanged(nameof(SaveCommand));
+            }
+        }
+
+        public ICommand ReportCommand
+        {
+            get
+            {
+                if (_reportCommand == null)
+                    _reportCommand = new RelayCommand<object>(
+                        (object _) => new EngineerReportModel().Report(Engineer.Tab_Number, Engineer.Last_Name),
+                        (object _) => true
+                   );
+                return _reportCommand;
+            }
+            set
+            {
+                _reportCommand = value;
+                InvokePropertyChanged(nameof(ReportCommand));
             }
         }
 

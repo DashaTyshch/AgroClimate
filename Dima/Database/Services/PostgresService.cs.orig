@@ -224,17 +224,20 @@ namespace Dima.Database.Services
             }
         }
 
-        public void ConfirmProj(int projId)
-        {
-            ExecuteInternal(ConfirmProjQuery(projId));
-        }
-
+<<<<<<< HEAD
         public List<Company> GetAllCompanies()
         {
             return QueryInternal<Company>(GetAllCompaniesQuery()).ToList(); 
         }
 
 
+=======
+        public void ConfirmProj(int projId)
+        {
+            ExecuteInternal(ConfirmProjQuery(projId));
+        }
+
+>>>>>>> 53ee6c20305a90f8ab1a064f6676cab2d97c7433
         private IEnumerable<T> QueryInternal<T>(string sql)
         {
             IEnumerable<T> result;
@@ -294,15 +297,6 @@ namespace Dima.Database.Services
             }
 
             return sb.ToString();
-        }
-
-        public List<Request> RequestsByEngineer(int tab_Number)
-        {
-            return QueryInternal<Request>(
-                "SELECT * " +
-                "FROM request " +
-                $"WHERE tab_number = {tab_Number}"
-                ).ToList();
         }
     }
 }

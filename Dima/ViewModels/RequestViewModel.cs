@@ -29,6 +29,10 @@ namespace Dima.ViewModels
             Projects = new ObservableCollection<Project>(_model.GetProjects(Request.Request_Name));
         }
 
+        public bool IsClosed { get => Request?.StateReq == Reqstate.Completed; }
+        public bool IsNotClosed { get => Request?.StateReq != Reqstate.Completed; }
+        public bool IsGoing { get => Request?.StateReq == Reqstate.Ongoing; }
+
         public Request Request
         {
             get => _request;

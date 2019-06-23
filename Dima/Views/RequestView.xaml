@@ -27,14 +27,44 @@
 
         <DockPanel Margin="20" LastChildFill="True">
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
-                <Button Content="+ проект" Command="{Binding AddProjectCommand}"></Button>
-                <Button Content="Зберегти" Command="{Binding BackCommand}"></Button>
+                <Button Content="+ проект" Command="{Binding AddProjectCommand}"
+                         Visibility="{Binding IsNotClosed, Converter={StaticResource BoolToVis}}"></Button>
+                <Button Content="Редагувати" Command="{Binding BackCommand}"
+                         Visibility="{Binding IsNotClosed, Converter={StaticResource BoolToVis}}"></Button>
+                <Button Content="Зберегти" Command="{Binding BackCommand}"
+                         Visibility="{Binding IsNotClosed, Converter={StaticResource BoolToVis}}"></Button>
             </StackPanel>
             
             <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="22"
                    Foreground="White" FontWeight="DemiBold" Text="{Binding Request.Request_Name}"/>
-            <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="22"
-                   Foreground="White" FontWeight="DemiBold" Text="Інфа про зам."/>
+
+            <DockPanel LastChildFill="True">
+                <Label DockPanel.Dock="Top" HorizontalAlignment="Center" Content="{Binding Request.StateReq}" 
+                       FontSize="18" Foreground="AntiqueWhite"/>
+                
+                <StackPanel DockPanel.Dock="Left">
+                    <StackPanel>
+                        <Label Content="Початок робіт:" Foreground="White"/>
+                        <DatePicker SelectedDate="{Binding Request.Creation_Date}" Height="46"></DatePicker>
+                        
+                        <Label Content="Закінчення робіт:" Foreground="White"
+                               Visibility="{Binding IsClosed, Converter={StaticResource BoolToVis}}"/>
+                        <DatePicker SelectedDate="{Binding Request.Finish_Date}" Height="46"
+                                    Visibility="{Binding IsClosed, Converter={StaticResource BoolToVis}}"></DatePicker>
+                        
+                        <Label Foreground="White" >Приблизна тривалість:</Label>
+                        <Label Content="{Binding Request.Approximate_Duration}"></Label>
+                        
+                        <Label Foreground="White" Visibility="{Binding IsClosed, Converter={StaticResource BoolToVis}}">Реальна тривалість:</Label>
+                        <Label Content="{Binding Request.Real_Duration}"
+                               Visibility="{Binding IsClosed, Converter={StaticResource BoolToVis}}"></Label>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <Button Content="Button"/>
+                </StackPanel>
+        </DockPanel>
         </DockPanel>
         <DockPanel Grid.Row="1" LastChildFill="True" Margin="20">
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">

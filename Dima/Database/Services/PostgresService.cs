@@ -41,6 +41,11 @@ namespace Dima.Database.Services
             "INNER JOIN brigadier bri ON r.telephone_number_of_brigadier = bri.telephone_number_of_brigadier " +
             "INNER JOIN engineeragroclimate eng ON r.tab_number = eng.tab_number;";
 
+        private static string ConfirmProjQuery(int projId) =>
+            "UPDATE project " +
+            "SET status = true " +
+            $"WHERE Id_Project = {projId}";
+
         private static string AllRequestsQuery => "SELECT * FROM request";
         private static string GetRequestByIdQuery(string id)
         {
@@ -191,6 +196,11 @@ namespace Dima.Database.Services
                 insertCmd.Parameters.Add(param);
                 insertCmd.ExecuteNonQuery();
             }
+        }
+
+        public void ConfirmProj(int projId)
+        {
+            ExecuteInternal(ConfirmProjQuery(projId));
         }
 
         private IEnumerable<T> QueryInternal<T>(string sql)

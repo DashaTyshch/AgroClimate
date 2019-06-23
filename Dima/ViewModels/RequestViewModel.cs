@@ -20,6 +20,7 @@ namespace Dima.ViewModels
         private readonly RequestModel _model;
 
         private ICommand _saveFileCommand;
+        private ICommand _confirmCommand;
         private ICommand _addProjectCommand;
 
         public RequestViewModel()
@@ -77,6 +78,27 @@ namespace Dima.ViewModels
             {
                 _addProjectCommand = value;
                 InvokePropertyChanged(nameof(AddProjectCommand));
+            }
+        }
+
+        public ICommand ConfirmCommand
+        {
+            get
+            {
+                if (_confirmCommand == null)
+                    _confirmCommand = new RelayCommand<object>(
+                        (object _) =>
+                        {
+                            _model.Confirm(SelectedProject.Id_Project);
+                            Projects = new ObservableCollection<Project>(_model.GetProjects(Request.Request_Name));
+                        }, 
+                        (object _) => SelectedProject != null && !Projects.Any(proj => proj.Status));
+                return _confirmCommand;
+            }
+            set
+            {
+                _confirmCommand = value;
+                InvokePropertyChanged(nameof(ConfirmCommand));
             }
         }
 

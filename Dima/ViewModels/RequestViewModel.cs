@@ -22,6 +22,7 @@ namespace Dima.ViewModels
         private ICommand _saveFileCommand;
         private ICommand _confirmCommand;
         private ICommand _addProjectCommand;
+        private ICommand _backCommand;
 
         public RequestViewModel()
         {
@@ -128,7 +129,9 @@ namespace Dima.ViewModels
                 filePath = openFileDialog.FileName;
                 fileContent = File.ReadAllBytes(filePath);
 
-                _model.CreateProject(fileContent);
+                _model.CreateProject(fileContent, Request.Request_Name);
+
+                Projects = new ObservableCollection<Project>(_model.GetProjects(Request.Request_Name));
             }
 
         }
@@ -167,6 +170,31 @@ namespace Dima.ViewModels
                 return;
 
             File.WriteAllBytes(saveFileDialog.FileName, SelectedProject.ProjFile);
+        }
+
+        public ICommand BackCommand
+        {
+            get
+            {
+                if (_backCommand == null)
+                    _backCommand = new RelayCommand<object>(BackCommandExecute, BackCommandCanExecute);
+                return _backCommand;
+            }
+            set
+            {
+                _backCommand = value;
+                InvokePropertyChanged(nameof(BackCommand));
+            }
+        }
+
+        private bool BackCommandCanExecute(object obj)
+        {
+            return true;
+        }
+
+        private void BackCommandExecute(object obj)
+        {
+            _model.GoBack();
         }
         #endregion
 

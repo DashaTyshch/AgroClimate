@@ -9,6 +9,7 @@ namespace Dima.Tools
         AddRequest,
         AddEngineer,
         Enginner,
+        AddBrigadier,
 
     }
 }

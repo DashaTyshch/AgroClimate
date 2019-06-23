@@ -51,5 +51,10 @@ namespace Dima.Models
         {
             NavigationManager.Instance.Navigate(ModesEnum.AddEngineer);
         }
+
+        public void AddBrigadier()
+        {
+            NavigationManager.Instance.Navigate(ModesEnum.AddBrigadier);
+        }
     }
 }

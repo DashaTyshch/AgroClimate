@@ -19,7 +19,7 @@ namespace Dima.ViewModels
         private ICommand _addEngineerCommand;
         private ICommand _cellCommand;
         private ICommand _exitCommand;
-
+        private ICommand _addBrigadierCommand;
         private MainModel Model { get; }
 
         private ObservableCollection<RequestsInfo> _reguestItems;
@@ -81,7 +81,7 @@ namespace Dima.ViewModels
         {
             return true;
         }
-
+        // analogichno dlya brigadira
         public ICommand AddEngineerCommand
         {
             get
@@ -109,6 +109,35 @@ namespace Dima.ViewModels
         {
             return true;
         }
+        // AddBrigadierCommand
+        public ICommand AddBrigadierCommand
+        {
+            get
+            {
+                if (_addBrigadierCommand == null)
+                {
+                    _addBrigadierCommand = new RelayCommand<object>(AddBrigadierExecute, AddBrigadierCanExecute);
+                }
+
+                return _addBrigadierCommand;
+            }
+            set
+            {
+                _addBrigadierCommand = value;
+                InvokePropertyChanged(nameof(AddBrigadierCommand));
+            }
+        }
+
+        private void AddBrigadierExecute(object obj)
+        {
+            Model.AddBrigadier();
+        }
+
+        private bool AddBrigadierCanExecute(object obj)
+        {
+            return true;
+        }
+        //
 
         public ICommand CellClickedCommand
         {

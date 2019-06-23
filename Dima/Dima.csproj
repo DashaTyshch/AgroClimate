@@ -46,6 +46,7 @@
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -62,6 +63,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -88,6 +90,7 @@
     <Compile Include="Database\Entities\Request.cs" />
     <Compile Include="Database\Models\RequestsInfo.cs" />
     <Compile Include="Database\Services\PostgresService.cs" />
+    <Compile Include="Models\AddBrigadierModel.cs" />
     <Compile Include="Models\AddEngineerModel.cs" />
     <Compile Include="Models\EngineerModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -97,10 +100,14 @@
     <Compile Include="Tools\ModesEnum.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="ViewModels\AddEngineerViewModel.cs" />
+    <Compile Include="ViewModels\AddBrigadierViewModel.cs" />
     <Compile Include="ViewModels\EngineerViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RequestViewModel.cs" />
+    <Compile Include="Views\AddBrigadier.xaml.cs">
+      <DependentUpon>AddBrigadier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEngineerView.xaml.cs">
       <DependentUpon>AddEngineerView.xaml</DependentUpon>
     </Compile>
@@ -126,6 +133,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddBrigadier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddEngineerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

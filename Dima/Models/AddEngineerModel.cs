@@ -17,17 +17,6 @@ namespace Dima.Models
         public bool CreateNewEngineer(EngineerAgroclimate engineer)
         {
             PostgresService.Instance.AddEngineer(engineer);
-            //var res = PostgresService.Instance().CreateEngineer(engineer);
-
-            //if (res == System.Net.HttpStatusCode.NoContent)
-            //{
-            //    //Storage.Instance.ChangeAllClients(clientDTO);
-            //    return AddResult.Success;
-            //}
-            //if (res == System.Net.HttpStatusCode.Conflict)
-            //    return AddResult.AlreadyCreated;
-
-            //return AddResult.Error;
             return true;
         }
     }

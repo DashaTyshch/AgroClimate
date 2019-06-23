@@ -56,13 +56,30 @@ namespace Dima.Database.Services
             "SELECT fullname " +
             "FROM manager " +
             $"WHERE login = '{login}' AND pwdhash = '{Hash(pwd)}'";
-
+        //add bri query too
+        private static string AddBrigadierQuery(Brigadier brigadier)
+        {
+            return "INSERT INTO brigadier "+ 
+                $"VALUES ({brigadier.Telephone_Number_Of_Brigadier}, " +
+                $"{ (brigadier.Address != null ? $"'{brigadier.Address}'" : "NULL")}, " +
+                $"'{ brigadier.Last_Name}', " +
+                $"'{brigadier.First_Name}', " +
+                $"{ (brigadier.Patronym != null ? $"'{brigadier.Patronym}'" : "NULL")}, " +
+                $"{(brigadier.Email != null ? $"'{brigadier.Email}'" : "NULL")}, " +
+                $" {brigadier.Daily_Salary}, " +
+                $"{brigadier.Car_Availability}, " +
+                $"{brigadier.Mount_Kit_Availability} ); ";
+            ////return; "" +
+            //return "INSERT INTO brigadier " +
+            //    $
+            ////       ""
+        }
         private static string AddEngineerQuery(EngineerAgroclimate engineer)
         {
             return "INSERT INTO engineeragroclimate " +
                    $"VALUES ({engineer.Tab_Number}, '{engineer.Telephone_Number}', " +
                    $"        '{engineer.Last_Name}', '{engineer.First_Name}', '{engineer.Patronym}', " +
-                   $"{ (engineer.Email == null ? $"'{engineer.Email}'" : "NULL") }); ";
+                   $"{ (engineer.Email != null ? $"'{engineer.Email}'" : "NULL") }); ";
         }
 
         private static string PojectsByReqNameQuery(string reqname) =>
@@ -123,6 +140,11 @@ namespace Dima.Database.Services
         public void AddEngineer(EngineerAgroclimate engineer)
         {
             ExecuteInternal(AddEngineerQuery(engineer));
+        }
+
+        public void AddBrigadier(Brigadier brigadier)
+        {
+            ExecuteInternal(AddBrigadierQuery(brigadier));
         }
 
         private IEnumerable<T> QueryInternal<T>(string sql)

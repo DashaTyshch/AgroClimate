@@ -38,6 +38,9 @@ namespace Dima.Models
                 case ModesEnum.Enginner:
                     _contentWindow.ContentControl.Content = new EngineerView();
                     break;
+                case ModesEnum.AddBrigadier:
+                    _contentWindow.ContentControl.Content = new AddBrigadier(); //povynno bulo view
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
             }

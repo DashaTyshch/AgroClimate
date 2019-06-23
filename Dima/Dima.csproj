@@ -110,6 +110,9 @@
     <Compile Include="Views\AddBrigadier.xaml.cs">
       <DependentUpon>AddBrigadier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddCompany.xaml.cs">
+      <DependentUpon>AddCompany.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEngineerView.xaml.cs">
       <DependentUpon>AddEngineerView.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AddBrigadier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddCompany.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
